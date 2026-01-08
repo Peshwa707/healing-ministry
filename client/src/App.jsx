@@ -5,6 +5,7 @@ import Ruqyah from './pages/Ruqyah'
 import PrayerWall from './pages/PrayerWall'
 import Salah from './pages/Salah'
 import Afflictions from './pages/Afflictions'
+import Quran from './pages/Quran'
 import './index.css'
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="prayer-wall" element={<PrayerWall />} />
           <Route path="salah" element={<Salah />} />
           <Route path="afflictions" element={<Afflictions />} />
+          <Route path="quran" element={<Quran />} />
         </Route>
       </Routes>
     </BrowserRouter>

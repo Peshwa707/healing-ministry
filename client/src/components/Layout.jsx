@@ -1,5 +1,5 @@
 import { Outlet, NavLink } from 'react-router-dom'
-import { Home, Book, Heart, BookOpen } from 'lucide-react'
+import { Home, Book, BookOpen, BookText } from 'lucide-react'
 import './Layout.css'
 
 export default function Layout() {
@@ -18,9 +18,9 @@ export default function Layout() {
           <Book size={24} />
           <span>Ruqyah</span>
         </NavLink>
-        <NavLink to="/prayer-wall" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-          <Heart size={24} />
-          <span>Duas</span>
+        <NavLink to="/quran" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+          <BookText size={24} />
+          <span>Quran</span>
         </NavLink>
         <NavLink to="/salah" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
           <BookOpen size={24} />
