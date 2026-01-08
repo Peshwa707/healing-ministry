@@ -157,35 +157,35 @@ export const surahs = [
         arabic: 'قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ',
         transliteration: 'Qul a\'uzhu bi Rabbil-falaq',
         translation: 'Say, "I seek refuge in the Lord of daybreak',
-        audioId: 6157
+        audioId: 6226
       },
       {
         number: 2,
         arabic: 'مِنْ شَرِّ مَا خَلَقَ',
         transliteration: 'Min sharri ma khalaq',
         translation: 'From the evil of that which He created',
-        audioId: 6158
+        audioId: 6227
       },
       {
         number: 3,
         arabic: 'وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ',
         transliteration: 'Wa min sharri ghasiqin iza waqab',
         translation: 'And from the evil of darkness when it settles',
-        audioId: 6159
+        audioId: 6228
       },
       {
         number: 4,
         arabic: 'وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ',
         transliteration: 'Wa min sharrin-naffathati fil-\'uqad',
         translation: 'And from the evil of the blowers in knots (witchcraft)',
-        audioId: 6160
+        audioId: 6229
       },
       {
         number: 5,
         arabic: 'وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ',
         transliteration: 'Wa min sharri hasidin iza hasad',
         translation: 'And from the evil of an envier when he envies',
-        audioId: 6161
+        audioId: 6230
       }
     ]
   },
@@ -209,42 +209,42 @@ export const surahs = [
         arabic: 'قُلْ أَعُوذُ بِرَبِّ النَّاسِ',
         transliteration: 'Qul a\'uzhu bi Rabbin-nas',
         translation: 'Say, "I seek refuge in the Lord of mankind',
-        audioId: 6162
+        audioId: 6231
       },
       {
         number: 2,
         arabic: 'مَلِكِ النَّاسِ',
         transliteration: 'Malikin-nas',
         translation: 'The Sovereign of mankind',
-        audioId: 6163
+        audioId: 6232
       },
       {
         number: 3,
         arabic: 'إِلَٰهِ النَّاسِ',
         transliteration: 'Ilahin-nas',
         translation: 'The God of mankind',
-        audioId: 6164
+        audioId: 6233
       },
       {
         number: 4,
         arabic: 'مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ',
         transliteration: 'Min sharril-waswasil-khannas',
         translation: 'From the evil of the retreating whisperer',
-        audioId: 6165
+        audioId: 6234
       },
       {
         number: 5,
         arabic: 'الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ',
         transliteration: 'Allazee yuwaswisu fee sudurin-nas',
         translation: 'Who whispers in the breasts of mankind',
-        audioId: 6166
+        audioId: 6235
       },
       {
         number: 6,
         arabic: 'مِنَ الْجِنَّةِ وَالنَّاسِ',
         transliteration: 'Minal-jinnati wan-nas',
         translation: 'From among the jinn and mankind',
-        audioId: 6167
+        audioId: 6236
       }
     ]
   }
