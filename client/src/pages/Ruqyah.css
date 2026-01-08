@@ -348,5 +348,329 @@
   font-size: 0.95rem;
 }
 
+/* Autoplay Bar */
+.autoplay-bar {
+  position: sticky;
+  top: 0;
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: white;
+  padding: var(--spacing-md);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-lg);
+  box-shadow: var(--shadow-lg);
+  z-index: 100;
+}
+
+.autoplay-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.playlist-name {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.track-counter {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.current-track {
+  background: rgba(255, 255, 255, 0.15);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.track-arabic {
+  font-family: 'Amiri', 'Traditional Arabic', serif;
+  font-size: 1.1rem;
+  direction: rtl;
+  text-align: right;
+  margin-bottom: var(--spacing-xs);
+}
+
+.track-name {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.autoplay-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.autoplay-controls button {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.autoplay-controls button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.autoplay-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.autoplay-controls .play-pause-btn {
+  background: white;
+  color: #059669;
+  padding: var(--spacing-md);
+}
+
+.autoplay-controls .stop-btn {
+  background: rgba(220, 38, 38, 0.8);
+}
+
+.autoplay-controls .stop-btn:hover {
+  background: rgba(220, 38, 38, 1);
+}
+
+/* Programs - Updated */
+.programs-intro {
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.6;
+}
+
+.program-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.play-program-btn {
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.play-program-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Adhkar Section */
+.adhkar-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.adhkar-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.adhkar-card {
+  border-left: 4px solid #f59e0b;
+}
+
+.adhkar-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.adhkar-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.adhkar-icon.morning {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+.adhkar-icon.evening {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+}
+
+.adhkar-icon.sleep {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+}
+
+.adhkar-info h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.adhkar-info .arabic-title {
+  display: block;
+  font-family: 'Amiri', serif;
+  color: #059669;
+  font-size: 1rem;
+}
+
+.adhkar-info .timing {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  margin-top: var(--spacing-xs);
+}
+
+.adhkar-desc {
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: var(--spacing-md);
+}
+
+.adhkar-items-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-md);
+}
+
+.preview-item {
+  background: var(--color-warm-light);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  color: var(--color-text);
+}
+
+.more-items {
+  background: var(--color-warm);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+}
+
+.play-adhkar-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+}
+
+.play-adhkar-btn.evening-btn {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+}
+
+.play-adhkar-btn.sleep-btn {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+}
+
+.play-adhkar-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Adhkar Details */
+.adhkar-details {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.adhkar-details > h3 {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 2px solid var(--color-warm);
+}
+
+.adhkar-detail-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.adhkar-detail-section:last-child {
+  margin-bottom: 0;
+}
+
+.adhkar-detail-section h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #059669;
+  margin-bottom: var(--spacing-md);
+}
+
+.adhkar-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.adhkar-item {
+  background: var(--color-warm-light);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  border-left: 3px solid #059669;
+}
+
+.adhkar-item .item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.adhkar-item .item-name {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.adhkar-item .item-times {
+  background: #059669;
+}
+
+.adhkar-item .arabic-text {
+  font-size: 1.2rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.adhkar-item .transliteration {
+  font-size: 0.9rem;
+}
+
+.adhkar-item .translation {
+  font-size: 0.9rem;
+}
+
+.adhkar-item .benefit {
+  background: #d1fae5;
+  color: #047857;
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  margin-top: var(--spacing-sm);
+}
+
 /* Arabic Font */
 @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
