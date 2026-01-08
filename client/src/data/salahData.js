@@ -95,7 +95,8 @@ export const salahSteps = [
         transliteration: 'Subhanaka Allahumma wa bihamdika, wa tabaraka ismuka, wa ta\'ala jadduka, wa la ilaha ghairuk',
         translation: 'Glory be to You, O Allah, and all praise is due to You. Blessed is Your name, exalted is Your majesty. There is no god worthy of worship except You.',
         instruction: 'Recite silently in the first rakah only. This is Sunnah, not obligatory.',
-        reference: 'Abu Dawud, Tirmidhi'
+        reference: 'Abu Dawud, Tirmidhi',
+        duaAudioId: 27
       },
       {
         id: 'taawwuz',
@@ -176,7 +177,8 @@ export const salahSteps = [
         translation: 'Glory be to my Lord, the Almighty',
         times: 3,
         instruction: 'Recite at least once, preferably three times or more.',
-        reference: 'Muslim, Abu Dawud'
+        reference: 'Muslim, Abu Dawud',
+        duaAudioId: 34
       }
     ]
   },
@@ -194,7 +196,8 @@ export const salahSteps = [
         arabic: 'سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ',
         transliteration: 'Sami\'Allahu liman hamidah',
         translation: 'Allah hears those who praise Him',
-        instruction: 'Say while rising from ruku.'
+        instruction: 'Say while rising from ruku.',
+        duaAudioId: 38
       },
       {
         id: 'rabbana-lakal-hamd',
@@ -204,6 +207,7 @@ export const salahSteps = [
         transliteration: 'Rabbana wa lakal-hamd',
         translation: 'Our Lord, to You is all praise',
         instruction: 'Say after standing up straight.',
+        duaAudioId: 39,
         alternative: {
           arabic: 'رَبَّنَا وَلَكَ الْحَمْدُ حَمْدًا كَثِيرًا طَيِّبًا مُبَارَكًا فِيهِ',
           transliteration: 'Rabbana wa lakal-hamdu hamdan katheeran tayyiban mubarakan feeh',
@@ -237,7 +241,8 @@ export const salahSteps = [
         translation: 'Glory be to my Lord, the Most High',
         times: 3,
         instruction: 'Recite at least once, preferably three times or more.',
-        reference: 'Muslim, Abu Dawud'
+        reference: 'Muslim, Abu Dawud',
+        duaAudioId: 42
       },
       {
         id: 'dua-sujud',
@@ -247,7 +252,8 @@ export const salahSteps = [
         transliteration: 'Allahummaghfir li dhanbi kullahu, diqqahu wa jillahu, wa awwalahu wa aakhirahu, wa \'alaniyyatahu wa sirrahu',
         translation: 'O Allah, forgive all my sins, the small and the great, the first and the last, the open and the secret.',
         instruction: 'This is the closest position to Allah. Make personal duas here.',
-        reference: 'Muslim'
+        reference: 'Muslim',
+        duaAudioId: 44
       }
     ]
   },
@@ -276,6 +282,7 @@ export const salahSteps = [
         translation: 'My Lord, forgive me. My Lord, forgive me.',
         instruction: 'Recite while sitting between the two prostrations.',
         reference: 'Ibn Majah',
+        duaAudioId: 48,
         alternative: {
           arabic: 'اللَّهُمَّ اغْفِرْ لِي، وَارْحَمْنِي، وَاهْدِنِي، وَعَافِنِي، وَارْزُقْنِي',
           transliteration: 'Allahummaghfir li, warhamni, wahdini, wa\'aafini, warzuqni',
@@ -308,7 +315,8 @@ export const salahSteps = [
         transliteration: 'Subhana Rabbiyal-A\'la',
         translation: 'Glory be to my Lord, the Most High',
         times: 3,
-        instruction: 'Recite at least once, preferably three times or more.'
+        instruction: 'Recite at least once, preferably three times or more.',
+        duaAudioId: 42
       }
     ]
   },
@@ -346,7 +354,8 @@ export const salahSteps = [
         transliteration: 'At-tahiyyatu lillahi was-salawatu wat-tayyibat, as-salamu \'alayka ayyuhan-Nabiyyu wa rahmatullahi wa barakatuh, as-salamu \'alayna wa \'ala \'ibadillahis-saliheen. Ash-hadu an la ilaha illallah wa ash-hadu anna Muhammadan \'abduhu wa rasuluh',
         translation: 'All compliments, prayers and pure words are due to Allah. Peace be upon you, O Prophet, and the mercy of Allah and His blessings. Peace be upon us and upon the righteous servants of Allah. I bear witness that there is no god except Allah, and I bear witness that Muhammad is His servant and messenger.',
         instruction: 'Sit on left foot with right foot upright. Point index finger when saying "la ilaha illallah".',
-        reference: 'Bukhari, Muslim'
+        reference: 'Bukhari, Muslim',
+        duaAudioId: 52
       }
     ],
     note: 'In a 2-rakah prayer (like Fajr), proceed to the final Tashahhud and Salawat. In 3-4 rakah prayers, stand up for the next rakah after this.'
@@ -364,7 +373,8 @@ export const salahSteps = [
         arabicName: 'التحيات',
         arabic: 'التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ، السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ، السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ',
         transliteration: 'At-tahiyyatu lillahi was-salawatu wat-tayyibat, as-salamu \'alayka ayyuhan-Nabiyyu wa rahmatullahi wa barakatuh, as-salamu \'alayna wa \'ala \'ibadillahis-saliheen. Ash-hadu an la ilaha illallah wa ash-hadu anna Muhammadan \'abduhu wa rasuluh',
-        translation: 'All compliments, prayers and pure words are due to Allah. Peace be upon you, O Prophet, and the mercy of Allah and His blessings. Peace be upon us and upon the righteous servants of Allah. I bear witness that there is no god except Allah, and I bear witness that Muhammad is His servant and messenger.'
+        translation: 'All compliments, prayers and pure words are due to Allah. Peace be upon you, O Prophet, and the mercy of Allah and His blessings. Peace be upon us and upon the righteous servants of Allah. I bear witness that there is no god except Allah, and I bear witness that Muhammad is His servant and messenger.',
+        duaAudioId: 52
       },
       {
         id: 'salawat',
@@ -374,7 +384,8 @@ export const salahSteps = [
         transliteration: 'Allahumma salli \'ala Muhammadin wa \'ala aali Muhammad, kama sallayta \'ala Ibrahima wa \'ala aali Ibrahim, innaka Hamidun Majid. Allahumma barik \'ala Muhammadin wa \'ala aali Muhammad, kama barakta \'ala Ibrahima wa \'ala aali Ibrahim, innaka Hamidun Majid',
         translation: 'O Allah, send prayers upon Muhammad and upon the family of Muhammad, as You sent prayers upon Ibrahim and the family of Ibrahim. Indeed, You are Praiseworthy and Glorious. O Allah, bless Muhammad and the family of Muhammad, as You blessed Ibrahim and the family of Ibrahim. Indeed, You are Praiseworthy and Glorious.',
         instruction: 'Recite after At-Tahiyyat in the final sitting.',
-        reference: 'Bukhari, Muslim'
+        reference: 'Bukhari, Muslim',
+        duaAudioId: 53
       },
       {
         id: 'dua-before-salam',
@@ -384,7 +395,8 @@ export const salahSteps = [
         transliteration: 'Allahumma inni a\'udhu bika min \'adhabi Jahannam, wa min \'adhabil-qabr, wa min fitnatil-mahya wal-mamat, wa min sharri fitnatil-Masihid-Dajjal',
         translation: 'O Allah, I seek refuge in You from the punishment of Hellfire, and from the punishment of the grave, and from the trials of life and death, and from the evil trial of the False Messiah.',
         instruction: 'This dua is highly recommended before saying salam.',
-        reference: 'Bukhari, Muslim'
+        reference: 'Bukhari, Muslim',
+        duaAudioId: 55
       },
       {
         id: 'rabbana-aatina',
@@ -439,7 +451,8 @@ export const afterSalahAdhkar = {
       arabic: 'أَسْتَغْفِرُ اللَّهَ، أَسْتَغْفِرُ اللَّهَ، أَسْتَغْفِرُ اللَّهَ',
       transliteration: 'Astaghfirullah, Astaghfirullah, Astaghfirullah',
       translation: 'I seek forgiveness from Allah (3 times)',
-      times: 3
+      times: 3,
+      duaAudioId: 66
     },
     {
       id: 2,
@@ -448,7 +461,8 @@ export const afterSalahAdhkar = {
       transliteration: 'Allahumma Antas-Salam wa minkas-salam, tabarakta ya Dhal-Jalali wal-Ikram',
       translation: 'O Allah, You are Peace and from You is peace. Blessed are You, O Possessor of Majesty and Honor.',
       times: 1,
-      reference: 'Muslim'
+      reference: 'Muslim',
+      duaAudioId: 67
     },
     {
       id: 3,
@@ -456,7 +470,8 @@ export const afterSalahAdhkar = {
       arabic: 'سُبْحَانَ اللَّهِ',
       transliteration: 'SubhanAllah',
       translation: 'Glory be to Allah',
-      times: 33
+      times: 33,
+      duaAudioId: 71
     },
     {
       id: 4,
@@ -464,7 +479,8 @@ export const afterSalahAdhkar = {
       arabic: 'الْحَمْدُ لِلَّهِ',
       transliteration: 'Alhamdulillah',
       translation: 'All praise is due to Allah',
-      times: 33
+      times: 33,
+      duaAudioId: 71
     },
     {
       id: 5,
@@ -472,7 +488,8 @@ export const afterSalahAdhkar = {
       arabic: 'اللَّهُ أَكْبَرُ',
       transliteration: 'Allahu Akbar',
       translation: 'Allah is the Greatest',
-      times: 33
+      times: 33,
+      duaAudioId: 71
     },
     {
       id: 6,
@@ -481,7 +498,8 @@ export const afterSalahAdhkar = {
       transliteration: 'La ilaha illallahu wahdahu la shareeka lah, lahul-mulku wa lahul-hamdu wa Huwa \'ala kulli shay\'in Qadeer',
       translation: 'There is no god except Allah alone, without partner. His is the dominion and His is the praise, and He is over all things capable.',
       times: 1,
-      reference: 'Muslim'
+      reference: 'Muslim',
+      duaAudioId: 72
     },
     {
       id: 7,
@@ -490,19 +508,27 @@ export const afterSalahAdhkar = {
       description: 'Recite Ayat al-Kursi (2:255)',
       times: 1,
       benefit: 'Whoever recites this after every prayer, nothing prevents them from entering Paradise except death.',
-      reference: 'An-Nasa\'i'
+      reference: 'An-Nasa\'i',
+      quranAudioId: 262
     }
   ]
 };
 
-// Helper function to get audio URL for verses that have audio IDs
-export const AUDIO_BASE_URL = 'https://cdn.islamic.network/quran/audio/128/ar.alafasy/';
-export const getAudioUrl = (audioId) => audioId ? `${AUDIO_BASE_URL}${audioId}.mp3` : null;
+// Audio URLs
+export const QURAN_AUDIO_BASE_URL = 'https://cdn.islamic.network/quran/audio/128/ar.alafasy/';
+export const DUA_AUDIO_BASE_URL = 'https://www.al-hamdoulillah.com/invocations/mp3/';
+
+// Helper function to get audio URL for Quran verses
+export const getAudioUrl = (audioId) => audioId ? `${QURAN_AUDIO_BASE_URL}${audioId}.mp3` : null;
+
+// Helper function to get audio URL for duas (from Hisn al-Muslim)
+export const getDuaAudioUrl = (duaNumber) => duaNumber ? `${DUA_AUDIO_BASE_URL}${duaNumber}.mp3` : null;
 
 export default {
   salahOverview,
   prerequisites,
   salahSteps,
   afterSalahAdhkar,
-  getAudioUrl
+  getAudioUrl,
+  getDuaAudioUrl
 };

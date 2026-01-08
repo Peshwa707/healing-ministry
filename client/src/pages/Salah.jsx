@@ -3,7 +3,7 @@ import {
   BookOpen, Clock, ChevronDown, ChevronUp, Play, Pause, Square,
   Volume2, Info, CheckCircle, List
 } from 'lucide-react'
-import { salahOverview, prerequisites, salahSteps, afterSalahAdhkar, getAudioUrl } from '../data/salahData'
+import { salahOverview, prerequisites, salahSteps, afterSalahAdhkar, getAudioUrl, getDuaAudioUrl } from '../data/salahData'
 import './Salah.css'
 
 export default function Salah() {
@@ -15,15 +15,15 @@ export default function Salah() {
   const [completedSteps, setCompletedSteps] = useState([])
   const audioRef = useRef(null)
 
-  // Play audio for verses with audio IDs
-  const playAudio = (audioId, uniqueKey) => {
+  // Play audio for verses with audio IDs (Quran) or dua audio IDs (Hisn al-Muslim)
+  const playAudio = (audioId, uniqueKey, isDua = false) => {
     if (playingAudio === uniqueKey) {
       audioRef.current?.pause()
       setPlayingAudio(null)
       return
     }
 
-    const audioUrl = getAudioUrl(audioId)
+    const audioUrl = isDua ? getDuaAudioUrl(audioId) : getAudioUrl(audioId)
     if (!audioUrl) return
 
     if (audioRef.current) {
@@ -31,10 +31,18 @@ export default function Salah() {
     }
 
     audioRef.current = new Audio(audioUrl)
-    audioRef.current.play()
+    audioRef.current.play().catch(err => {
+      console.error('Audio playback failed:', err)
+      setPlayingAudio(null)
+    })
     setPlayingAudio(uniqueKey)
 
     audioRef.current.onended = () => {
+      setPlayingAudio(null)
+    }
+
+    audioRef.current.onerror = () => {
+      console.error('Audio failed to load')
       setPlayingAudio(null)
     }
   }
@@ -230,6 +238,19 @@ export default function Salah() {
           )}
         </button>
       )}
+
+      {element.duaAudioId && !element.verses && (
+        <button
+          className={`play-audio-btn btn ${playingAudio === `${stepId}-${element.id}-dua` ? 'playing' : ''}`}
+          onClick={() => playAudio(element.duaAudioId, `${stepId}-${element.id}-dua`, true)}
+        >
+          {playingAudio === `${stepId}-${element.id}-dua` ? (
+            <><Pause size={16} /> Pause</>
+          ) : (
+            <><Volume2 size={16} /> Listen</>
+          )}
+        </button>
+      )}
     </div>
   )
 
@@ -338,6 +359,32 @@ export default function Salah() {
 
             {item.reference && (
               <span className="reference">{item.reference}</span>
+            )}
+
+            {item.duaAudioId && (
+              <button
+                className={`play-audio-btn btn ${playingAudio === `after-${item.id}` ? 'playing' : ''}`}
+                onClick={() => playAudio(item.duaAudioId, `after-${item.id}`, true)}
+              >
+                {playingAudio === `after-${item.id}` ? (
+                  <><Pause size={16} /> Pause</>
+                ) : (
+                  <><Volume2 size={16} /> Listen</>
+                )}
+              </button>
+            )}
+
+            {item.quranAudioId && (
+              <button
+                className={`play-audio-btn btn ${playingAudio === `after-quran-${item.id}` ? 'playing' : ''}`}
+                onClick={() => playAudio(item.quranAudioId, `after-quran-${item.id}`, false)}
+              >
+                {playingAudio === `after-quran-${item.id}` ? (
+                  <><Pause size={16} /> Pause</>
+                ) : (
+                  <><Play size={16} /> Play Recitation</>
+                )}
+              </button>
             )}
           </div>
         ))}
