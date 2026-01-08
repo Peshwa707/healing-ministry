@@ -1,0 +1,152 @@
+.prayer-wall-page {
+  animation: fadeIn 0.3s ease;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.page-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xs);
+}
+
+.page-header p {
+  color: var(--color-text-light);
+}
+
+.add-prayer-btn {
+  width: 100%;
+  margin-bottom: var(--spacing-lg);
+}
+
+.prayers-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.prayer-card {
+  animation: fadeIn 0.3s ease;
+}
+
+.prayer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.prayer-name {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.prayer-date {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.prayer-text {
+  color: var(--color-text);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-md);
+}
+
+.prayer-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.pray-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--color-warm);
+  color: var(--color-text-light);
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.pray-btn:hover:not(:disabled) {
+  background: var(--color-primary-light);
+  color: white;
+}
+
+.pray-btn.prayed {
+  background: var(--color-primary);
+  color: white;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md);
+  z-index: 1000;
+}
+
+.modal {
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.modal-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: none;
+  color: var(--color-text-light);
+  padding: 4px;
+}
+
+.close-btn:hover {
+  color: var(--color-text);
+}
+
+.form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xs);
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: auto;
+}
+
+.modal form .btn {
+  width: 100%;
+  margin-top: var(--spacing-sm);
+}

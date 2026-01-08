@@ -1,0 +1,30 @@
+workflows:
+  healing-ministry-android:
+    name: Healing Ministry Android
+    max_build_duration: 60
+    instance_type: linux_x2
+    working_directory: client
+    environment:
+      node: 22
+      java: 21
+    scripts:
+      - name: Install dependencies
+        script: |
+          npm install
+      - name: Build web assets
+        script: |
+          npm run build
+      - name: Sync Capacitor
+        script: |
+          npx cap sync android
+      - name: Build Android APK
+        script: |
+          cd android
+          bash gradlew assembleDebug
+      - name: Copy APK to output
+        script: |
+          mkdir -p /tmp/artifacts
+          cp android/app/build/outputs/apk/debug/app-debug.apk /tmp/artifacts/HealingMinistry.apk
+          echo "APK ready at /tmp/artifacts/HealingMinistry.apk"
+    artifacts:
+      - /tmp/artifacts/HealingMinistry.apk

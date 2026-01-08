@@ -1,0 +1,139 @@
+.home-page {
+  animation: fadeIn 0.3s ease;
+}
+
+.home-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.header-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--spacing-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  color: white;
+  border-radius: var(--radius-lg);
+}
+
+.home-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xs);
+}
+
+.home-header p {
+  color: var(--color-text-light);
+}
+
+.daily-verse {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  background: linear-gradient(135deg, var(--color-warm-light) 0%, var(--color-warm) 100%);
+}
+
+.daily-verse h2 {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.daily-verse blockquote {
+  font-size: 1.125rem;
+  font-style: italic;
+  color: var(--color-text);
+  line-height: 1.7;
+  margin-bottom: var(--spacing-sm);
+}
+
+.daily-verse cite {
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+}
+
+.quick-prayer {
+  margin-bottom: var(--spacing-lg);
+}
+
+.quick-prayer h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+}
+
+.quick-prayer form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.quick-prayer textarea {
+  min-height: 80px;
+}
+
+.success-message {
+  color: var(--color-success);
+  text-align: center;
+  margin-top: var(--spacing-sm);
+  font-weight: 500;
+}
+
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+}
+
+.action-card {
+  background: var(--color-surface);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.action-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.action-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto var(--spacing-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary-light);
+  color: white;
+  border-radius: var(--radius-md);
+}
+
+.action-icon.secondary {
+  background: var(--color-secondary);
+}
+
+.action-card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xs);
+}
+
+.action-card p {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+}
+
+@media (max-width: 400px) {
+  .quick-actions {
+    grid-template-columns: 1fr;
+  }
+}
