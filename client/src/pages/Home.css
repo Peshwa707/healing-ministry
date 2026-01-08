@@ -19,6 +19,10 @@
   border-radius: var(--radius-lg);
 }
 
+.header-icon.islamic {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
 .home-header h1 {
   font-size: 1.75rem;
   font-weight: 700;
@@ -36,16 +40,30 @@
   background: linear-gradient(135deg, var(--color-warm-light) 0%, var(--color-warm) 100%);
 }
 
+.daily-verse.islamic-card {
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  border-left: 4px solid #059669;
+}
+
 .daily-verse h2 {
   font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--color-primary);
+  color: #059669;
+  margin-bottom: var(--spacing-md);
+}
+
+.arabic-verse {
+  font-family: 'Amiri', 'Traditional Arabic', serif;
+  font-size: 1.4rem;
+  line-height: 2;
+  direction: rtl;
+  color: var(--color-text);
   margin-bottom: var(--spacing-md);
 }
 
 .daily-verse blockquote {
-  font-size: 1.125rem;
+  font-size: 1.1rem;
   font-style: italic;
   color: var(--color-text);
   line-height: 1.7;
@@ -77,8 +95,12 @@
   min-height: 80px;
 }
 
+.islamic-btn {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
 .success-message {
-  color: var(--color-success);
+  color: #059669;
   text-align: center;
   margin-top: var(--spacing-sm);
   font-weight: 500;
@@ -88,6 +110,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
 }
 
 .action-card {
@@ -116,6 +139,10 @@
   border-radius: var(--radius-md);
 }
 
+.action-icon.islamic {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
 .action-icon.secondary {
   background: var(--color-secondary);
 }
@@ -132,8 +159,38 @@
   color: var(--color-text-light);
 }
 
+.hadith-card {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-left: 4px solid #f59e0b;
+  text-align: center;
+}
+
+.hadith-card h3 {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #d97706;
+  margin-bottom: var(--spacing-sm);
+}
+
+.hadith-text {
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--color-text);
+  line-height: 1.7;
+  margin-bottom: var(--spacing-sm);
+}
+
+.hadith-card cite {
+  color: var(--color-text-light);
+  font-size: 0.85rem;
+}
+
 @media (max-width: 400px) {
   .quick-actions {
     grid-template-columns: 1fr;
   }
 }
+
+/* Arabic Font */
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');

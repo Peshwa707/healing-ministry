@@ -1,32 +1,53 @@
 import { useState } from 'react'
-import { Heart, BookOpen, Sparkles, Send } from 'lucide-react'
+import { Book, Heart, Moon, Send } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import './Home.css'
 
-const dailyVerse = {
-  text: "Come to me, all you who are weary and burdened, and I will give you rest.",
-  reference: "Matthew 11:28",
-}
+const dailyVerses = [
+  {
+    arabic: 'وَنُنَزِّلُ مِنَ الْقُرْآنِ مَا هُوَ شِفَاءٌ وَرَحْمَةٌ لِلْمُؤْمِنِينَ',
+    translation: 'And We send down of the Quran that which is healing and mercy for the believers.',
+    reference: 'Surah Al-Isra 17:82',
+  },
+  {
+    arabic: 'أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ',
+    translation: 'Verily, in the remembrance of Allah do hearts find rest.',
+    reference: 'Surah Ar-Ra\'d 13:28',
+  },
+  {
+    arabic: 'وَإِذَا مَرِضْتُ فَهُوَ يَشْفِينِ',
+    translation: 'And when I am ill, it is He who cures me.',
+    reference: 'Surah Ash-Shu\'ara 26:80',
+  },
+  {
+    arabic: 'رَبِّ إِنِّي مَسَّنِيَ الضُّرُّ وَأَنْتَ أَرْحَمُ الرَّاحِمِينَ',
+    translation: 'My Lord, indeed adversity has touched me, and you are the Most Merciful of the merciful.',
+    reference: 'Surah Al-Anbiya 21:83',
+  },
+]
 
 export default function Home() {
-  const [quickPrayer, setQuickPrayer] = useState('')
+  const [quickDua, setQuickDua] = useState('')
   const [submitted, setSubmitted] = useState(false)
 
-  const handleQuickPrayer = (e) => {
-    e.preventDefault()
-    if (!quickPrayer.trim()) return
+  // Get verse based on day of year
+  const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 86400000)
+  const dailyVerse = dailyVerses[dayOfYear % dailyVerses.length]
 
-    // Save to localStorage for now
+  const handleQuickDua = (e) => {
+    e.preventDefault()
+    if (!quickDua.trim()) return
+
     const prayers = JSON.parse(localStorage.getItem('my_prayers') || '[]')
     prayers.unshift({
       id: Date.now(),
-      text: quickPrayer,
+      text: quickDua,
       createdAt: new Date().toISOString(),
       answered: false,
     })
     localStorage.setItem('my_prayers', JSON.stringify(prayers))
 
-    setQuickPrayer('')
+    setQuickDua('')
     setSubmitted(true)
     setTimeout(() => setSubmitted(false), 3000)
   }
@@ -34,54 +55,63 @@ export default function Home() {
   return (
     <div className="page home-page">
       <header className="home-header">
-        <div className="header-icon">
-          <Sparkles size={32} />
+        <div className="header-icon islamic">
+          <Moon size={32} />
         </div>
         <h1>Healing Ministry</h1>
-        <p>Find peace, hope, and spiritual renewal</p>
+        <p>Islamic Ruqyah & Spiritual Healing</p>
       </header>
 
-      <section className="daily-verse card">
-        <h2>Today's Verse</h2>
-        <blockquote>"{dailyVerse.text}"</blockquote>
+      <section className="daily-verse card islamic-card">
+        <h2>Verse of the Day</h2>
+        <p className="arabic-verse">{dailyVerse.arabic}</p>
+        <blockquote>"{dailyVerse.translation}"</blockquote>
         <cite>— {dailyVerse.reference}</cite>
       </section>
 
       <section className="quick-prayer card">
-        <h2>Quick Prayer Request</h2>
-        <form onSubmit={handleQuickPrayer}>
+        <h2>Quick Dua Request</h2>
+        <form onSubmit={handleQuickDua}>
           <textarea
-            value={quickPrayer}
-            onChange={(e) => setQuickPrayer(e.target.value)}
-            placeholder="Share what's on your heart..."
+            value={quickDua}
+            onChange={(e) => setQuickDua(e.target.value)}
+            placeholder="Write your dua or prayer need..."
             rows={3}
           />
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary islamic-btn">
             <Send size={18} />
-            Submit Prayer
+            Save Dua
           </button>
         </form>
         {submitted && (
-          <p className="success-message">Your prayer has been saved!</p>
+          <p className="success-message">Your dua has been saved! May Allah accept it.</p>
         )}
       </section>
 
       <section className="quick-actions">
+        <Link to="/ruqyah" className="action-card">
+          <div className="action-icon islamic">
+            <Book size={28} />
+          </div>
+          <h3>Ruqyah</h3>
+          <p>Quran healing verses</p>
+        </Link>
+
         <Link to="/prayer-wall" className="action-card">
           <div className="action-icon">
             <Heart size={28} />
           </div>
-          <h3>Prayer Wall</h3>
-          <p>Join in prayer with others</p>
+          <h3>Community Duas</h3>
+          <p>Make dua for others</p>
         </Link>
+      </section>
 
-        <Link to="/devotionals" className="action-card">
-          <div className="action-icon secondary">
-            <BookOpen size={28} />
-          </div>
-          <h3>Daily Devotionals</h3>
-          <p>Grow in your faith journey</p>
-        </Link>
+      <section className="hadith-card card">
+        <h3>Hadith on Healing</h3>
+        <p className="hadith-text">
+          "Make use of the two cures: honey and the Quran."
+        </p>
+        <cite>— Ibn Majah</cite>
       </section>
     </div>
   )

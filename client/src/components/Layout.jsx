@@ -1,5 +1,5 @@
 import { Outlet, NavLink } from 'react-router-dom'
-import { Home, Heart, BookOpen, User } from 'lucide-react'
+import { Home, Book, Heart, User } from 'lucide-react'
 import './Layout.css'
 
 export default function Layout() {
@@ -14,17 +14,17 @@ export default function Layout() {
           <Home size={24} />
           <span>Home</span>
         </NavLink>
+        <NavLink to="/ruqyah" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+          <Book size={24} />
+          <span>Ruqyah</span>
+        </NavLink>
         <NavLink to="/prayer-wall" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
           <Heart size={24} />
-          <span>Prayers</span>
-        </NavLink>
-        <NavLink to="/devotionals" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-          <BookOpen size={24} />
-          <span>Devotions</span>
+          <span>Duas</span>
         </NavLink>
         <NavLink to="/my-prayers" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
           <User size={24} />
-          <span>My Prayers</span>
+          <span>My Duas</span>
         </NavLink>
       </nav>
     </div>
