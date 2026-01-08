@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Book, Heart, Moon, Send } from 'lucide-react'
+import { Book, Heart, Moon, Send, AlertCircle } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import './Home.css'
 
@@ -95,6 +95,14 @@ export default function Home() {
           </div>
           <h3>Ruqyah</h3>
           <p>Quran healing verses</p>
+        </Link>
+
+        <Link to="/afflictions" className="action-card">
+          <div className="action-icon warning">
+            <AlertCircle size={28} />
+          </div>
+          <h3>Afflictions</h3>
+          <p>Learn about spiritual afflictions</p>
         </Link>
 
         <Link to="/prayer-wall" className="action-card">
