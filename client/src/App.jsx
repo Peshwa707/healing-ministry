@@ -3,7 +3,7 @@ import Layout from './components/Layout'
 import Home from './pages/Home'
 import Ruqyah from './pages/Ruqyah'
 import PrayerWall from './pages/PrayerWall'
-import MyPrayers from './pages/MyPrayers'
+import Salah from './pages/Salah'
 import Afflictions from './pages/Afflictions'
 import './index.css'
 
@@ -15,7 +15,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="ruqyah" element={<Ruqyah />} />
           <Route path="prayer-wall" element={<PrayerWall />} />
-          <Route path="my-prayers" element={<MyPrayers />} />
+          <Route path="salah" element={<Salah />} />
           <Route path="afflictions" element={<Afflictions />} />
         </Route>
       </Routes>
