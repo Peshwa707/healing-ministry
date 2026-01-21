@@ -673,3 +673,589 @@
   font-size: 0.85rem;
   margin-top: var(--spacing-sm);
 }
+
+/* ==========================================
+   MEMORIZATION SECTION STYLES
+   ========================================== */
+
+.memorize-section {
+  margin-bottom: var(--spacing-lg);
+}
+
+.memorize-header {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.memorize-header h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xs);
+}
+
+.memorize-header p {
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+}
+
+/* Memorization Progress */
+.memorize-progress {
+  margin-bottom: var(--spacing-md);
+}
+
+.progress-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xs);
+}
+
+.progress-text {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.reset-btn {
+  padding: 6px;
+  background: var(--color-warm);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-light);
+  transition: all 0.2s ease;
+}
+
+.reset-btn:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* Mode Selector */
+.mode-selector {
+  display: flex;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-lg);
+  background: var(--color-warm);
+  padding: 4px;
+  border-radius: var(--radius-md);
+}
+
+.mode-btn {
+  flex: 1;
+  padding: 10px 8px;
+  background: none;
+  color: var(--color-text-light);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.mode-btn.active {
+  background: var(--color-surface);
+  color: #059669;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Flashcard Container */
+.flashcard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+.flashcard {
+  width: 100%;
+  min-height: 280px;
+  position: relative;
+  border: 2px solid #059669;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.flashcard-front,
+.flashcard-back {
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.flashcard-front {
+  justify-content: center;
+  min-height: 280px;
+}
+
+.flashcard-back {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+}
+
+.card-category {
+  padding: 4px 12px;
+  background: #059669;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  margin-bottom: var(--spacing-md);
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xs);
+}
+
+.card-arabic-name {
+  font-family: 'Amiri', serif;
+  font-size: 1.1rem;
+  color: #059669;
+  margin-bottom: var(--spacing-md);
+}
+
+.card-when {
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.5;
+}
+
+.reveal-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.flashcard-back .arabic-text {
+  font-size: 1.4rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.flashcard-back .transliteration {
+  font-size: 1rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.flashcard-back .translation {
+  font-size: 0.95rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.flashcard-back .times-badge {
+  margin-bottom: var(--spacing-md);
+}
+
+.hide-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 6px 12px;
+  background: none;
+  color: var(--color-text-light);
+  font-size: 0.85rem;
+  margin-top: var(--spacing-sm);
+}
+
+.hide-btn:hover {
+  color: var(--color-text);
+}
+
+/* Card Navigation */
+.card-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: var(--spacing-md);
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 10px 16px;
+  background: var(--color-warm);
+  color: var(--color-text);
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+  background: var(--color-warm-light);
+}
+
+.card-counter {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* Memorize Button */
+.memorize-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+}
+
+.memorize-btn.btn-success {
+  background: #10b981;
+}
+
+/* No Cards Message */
+.no-cards {
+  text-align: center;
+  padding: var(--spacing-xl);
+  color: var(--color-text-light);
+}
+
+/* Quick Reference List */
+.quick-reference {
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+  border-top: 2px solid var(--color-warm);
+}
+
+.quick-reference h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-md);
+}
+
+.duas-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.dua-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--color-warm-light);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dua-item:hover {
+  background: var(--color-warm);
+}
+
+.dua-item.memorized {
+  background: #d1fae5;
+  border-left: 3px solid #10b981;
+}
+
+.dua-number {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-warm);
+  color: var(--color-text-light);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.dua-item.memorized .dua-number {
+  background: #10b981;
+  color: white;
+}
+
+.dua-info {
+  flex: 1;
+}
+
+.dua-info .dua-name {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.dua-info .dua-category {
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+}
+
+.check-icon {
+  color: #10b981;
+  flex-shrink: 0;
+}
+
+/* ==========================================
+   DAILY DUAS SECTION STYLES
+   ========================================== */
+
+.daily-duas-section {
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Witr Section */
+.witr-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.witr-section .section-header h3 {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.witr-overview {
+  margin-bottom: var(--spacing-lg);
+  border-left: 4px solid #8b5cf6;
+}
+
+.witr-overview p {
+  color: var(--color-text);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-md);
+}
+
+.witr-info {
+  margin-bottom: var(--spacing-md);
+}
+
+.witr-info .timing {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 4px 12px;
+  background: #8b5cf6;
+  color: white;
+  font-size: 0.85rem;
+  border-radius: var(--radius-full);
+}
+
+.witr-overview h5 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #7c3aed;
+  margin-bottom: var(--spacing-sm);
+}
+
+.witr-overview ul {
+  margin-left: var(--spacing-lg);
+  color: var(--color-text);
+}
+
+.witr-overview li {
+  margin-bottom: var(--spacing-xs);
+  line-height: 1.5;
+}
+
+.witr-duas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.witr-duas .dua-card {
+  border-left: 4px solid #8b5cf6;
+}
+
+.dua-card {
+  padding: var(--spacing-md);
+}
+
+.dua-card .dua-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-sm);
+}
+
+.dua-card h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.dua-card .arabic-name {
+  font-family: 'Amiri', serif;
+  font-size: 0.9rem;
+  color: #8b5cf6;
+  display: block;
+}
+
+.dua-desc {
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+  margin-bottom: var(--spacing-md);
+  font-style: italic;
+}
+
+.dua-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm);
+  background: #fef3c7;
+  color: #92400e;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  margin-top: var(--spacing-sm);
+}
+
+/* Daily Categories Section */
+.daily-categories-section {
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+  border-top: 2px solid var(--color-warm);
+}
+
+.daily-categories-section .section-header h3 {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.daily-categories-section .section-header p {
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+  margin-top: var(--spacing-xs);
+}
+
+/* Categories Grid */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-lg);
+}
+
+.category-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-md);
+  background: var(--color-surface);
+  border: 2px solid var(--color-warm);
+  border-radius: var(--radius-md);
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.category-card:hover {
+  border-color: #059669;
+  background: #f0fdf4;
+}
+
+.category-card.active {
+  border-color: #059669;
+  background: #d1fae5;
+}
+
+.category-card svg {
+  color: #059669;
+}
+
+.category-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.category-arabic {
+  font-family: 'Amiri', serif;
+  font-size: 0.85rem;
+  color: #059669;
+}
+
+.dua-count {
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+  padding: 2px 8px;
+  background: var(--color-warm);
+  border-radius: var(--radius-full);
+}
+
+.category-card.active .dua-count {
+  background: #059669;
+  color: white;
+}
+
+/* Category Duas */
+.category-duas {
+  margin-top: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.category-duas .dua-card {
+  border-left: 4px solid #059669;
+}
+
+.dua-expand-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  padding: 0;
+  text-align: left;
+}
+
+.dua-expand-header h4 {
+  font-size: 0.95rem;
+}
+
+.dua-expand-header .arabic-name {
+  color: #059669;
+}
+
+.dua-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.dua-card .dua-content {
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-warm);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 400px) {
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mode-selector {
+    flex-direction: column;
+  }
+
+  .mode-btn {
+    text-align: center;
+  }
+
+  .flashcard {
+    min-height: 320px;
+  }
+
+  .flashcard-front {
+    min-height: 320px;
+  }
+}
