@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import {
   Book, ChevronDown, ChevronUp, Play, Pause, Search,
   BookOpen, ArrowLeft, Loader, Volume2, Info
@@ -23,7 +23,9 @@ export default function Quran() {
   const [expandedVerse, setExpandedVerse] = useState(null)
   const [playingAudio, setPlayingAudio] = useState(null)
   const [showTafsir, setShowTafsir] = useState({})
+  const [fetchError, setFetchError] = useState(null)
   const audioRef = useRef(null)
+  const abortControllerRef = useRef(null)
 
   // Fetch list of all surahs
   useEffect(() => {
@@ -45,20 +47,31 @@ export default function Quran() {
 
   // Fetch surah data when selected
   const fetchSurahData = async (surahNumber) => {
+    // Cancel any in-flight request to prevent race conditions
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort()
+    }
+    abortControllerRef.current = new AbortController()
+    const { signal } = abortControllerRef.current
+
     setLoadingSurah(true)
     setSelectedSurah(surahNumber)
     setSurahData(null)
     setTafsirData(null)
     setExpandedVerse(null)
     setShowTafsir({})
+    setFetchError(null)
 
     try {
       // Fetch Arabic and English translation in parallel
       const [arabicRes, englishRes, tafsirRes] = await Promise.all([
-        fetch(`${SURAH_ARABIC_API}/${surahNumber}`),
-        fetch(`${SURAH_TRANSLATION_API}/${surahNumber}/en.asad`),
-        fetch(`${TAFSIR_API}/${surahNumber}.json`)
+        fetch(`${SURAH_ARABIC_API}/${surahNumber}`, { signal }),
+        fetch(`${SURAH_TRANSLATION_API}/${surahNumber}/en.asad`, { signal }),
+        fetch(`${TAFSIR_API}/${surahNumber}.json`, { signal })
       ])
+
+      // Check if request was aborted
+      if (signal.aborted) return
 
       const arabicData = await arabicRes.json()
       const englishData = await englishRes.json()
@@ -67,6 +80,9 @@ export default function Quran() {
       if (tafsirRes.ok) {
         tafsir = await tafsirRes.json()
       }
+
+      // Double-check abort status after parsing
+      if (signal.aborted) return
 
       if (arabicData.code === 200 && englishData.code === 200) {
         // Combine Arabic and English verses
@@ -85,11 +101,20 @@ export default function Quran() {
           verses: combinedVerses
         })
         setTafsirData(tafsir)
+      } else {
+        setFetchError('Failed to load surah data')
       }
     } catch (error) {
+      if (error.name === 'AbortError') {
+        // Request was cancelled, ignore
+        return
+      }
       console.error('Error fetching surah:', error)
+      setFetchError('Failed to load surah. Please try again.')
     } finally {
-      setLoadingSurah(false)
+      if (!signal.aborted) {
+        setLoadingSurah(false)
+      }
     }
   }
 
@@ -101,8 +126,12 @@ export default function Quran() {
       return
     }
 
+    // Clean up previous audio to prevent memory leak
     if (audioRef.current) {
       audioRef.current.pause()
+      audioRef.current.src = ''
+      audioRef.current.onended = null
+      audioRef.current.onerror = null
     }
 
     audioRef.current = new Audio(`${AUDIO_BASE_URL}/${audioId}.mp3`)
@@ -115,7 +144,12 @@ export default function Quran() {
 
   // Clean up audio on unmount
   useEffect(() => {
-    return () => audioRef.current?.pause()
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause()
+        audioRef.current.src = ''
+      }
+    }
   }, [])
 
   // Filter surahs by search
@@ -260,10 +294,11 @@ export default function Quran() {
                         <BookOpen size={16} />
                         <h4>Tafsir Ibn Kathir</h4>
                       </div>
-                      <div
-                        className="tafsir-content"
-                        dangerouslySetInnerHTML={{ __html: tafsir.replace(/\n/g, '<br/>') }}
-                      />
+                      <div className="tafsir-content">
+                        {tafsir.split('\n').map((paragraph, idx) => (
+                          <p key={idx}>{paragraph}</p>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>
@@ -271,6 +306,13 @@ export default function Quran() {
             })}
           </div>
         </>
+      ) : fetchError ? (
+        <div className="error-state">
+          <p>{fetchError}</p>
+          <button className="btn btn-primary" onClick={() => fetchSurahData(selectedSurah)}>
+            Try Again
+          </button>
+        </div>
       ) : (
         <div className="error-state">
           <p>Failed to load surah. Please try again.</p>

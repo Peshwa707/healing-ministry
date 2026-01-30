@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
-import { Plus, Check, Trash2, Clock, CheckCircle } from 'lucide-react'
+import { Plus, Check, Trash2, Clock, CheckCircle, X, AlertTriangle } from 'lucide-react'
 import './MyPrayers.css'
 
 export default function MyPrayers() {
   const [prayers, setPrayers] = useState([])
   const [newPrayer, setNewPrayer] = useState('')
   const [filter, setFilter] = useState('all') // 'all', 'active', 'answered'
+  const [deleteConfirm, setDeleteConfirm] = useState(null) // ID of prayer to delete
 
   useEffect(() => {
     const stored = localStorage.getItem('my_prayers')
@@ -45,9 +46,18 @@ export default function MyPrayers() {
   }
 
   const deletePrayer = (id) => {
-    if (confirm('Delete this prayer?')) {
-      savePrayers(prayers.filter(p => p.id !== id))
+    setDeleteConfirm(id)
+  }
+
+  const confirmDelete = () => {
+    if (deleteConfirm) {
+      savePrayers(prayers.filter(p => p.id !== deleteConfirm))
+      setDeleteConfirm(null)
     }
+  }
+
+  const cancelDelete = () => {
+    setDeleteConfirm(null)
   }
 
   const filteredPrayers = prayers.filter(p => {
@@ -116,6 +126,32 @@ export default function MyPrayers() {
           Answered
         </button>
       </div>
+
+      {/* Delete Confirmation Modal */}
+      {deleteConfirm && (
+        <div className="modal-overlay" onClick={cancelDelete}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <AlertTriangle size={24} className="warning-icon" />
+              <h3>Delete Prayer</h3>
+              <button className="modal-close" onClick={cancelDelete}>
+                <X size={20} />
+              </button>
+            </div>
+            <p className="modal-message">
+              Are you sure you want to delete this prayer? This action cannot be undone.
+            </p>
+            <div className="modal-actions">
+              <button className="btn btn-secondary" onClick={cancelDelete}>
+                Cancel
+              </button>
+              <button className="btn btn-danger" onClick={confirmDelete}>
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="prayers-list">
         {filteredPrayers.length === 0 ? (

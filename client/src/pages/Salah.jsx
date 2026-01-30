@@ -60,8 +60,12 @@ export default function Salah() {
     const audioUrl = isDua ? getDuaAudioUrl(audioId) : getAudioUrl(audioId)
     if (!audioUrl) return
 
+    // Clean up previous audio to prevent memory leak
     if (audioRef.current) {
       audioRef.current.pause()
+      audioRef.current.src = ''
+      audioRef.current.onended = null
+      audioRef.current.onerror = null
     }
 
     audioRef.current = new Audio(audioUrl)
@@ -83,7 +87,10 @@ export default function Salah() {
 
   useEffect(() => {
     return () => {
-      audioRef.current?.pause()
+      if (audioRef.current) {
+        audioRef.current.pause()
+        audioRef.current.src = ''
+      }
     }
   }, [])
 

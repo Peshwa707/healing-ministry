@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { Book, Play, Pause, Square, ChevronRight, ChevronDown, Volume2, Info, Sun, Moon as MoonIcon, Bed, SkipForward, SkipBack, List } from 'lucide-react'
+import { Book, Play, Pause, Square, ChevronRight, ChevronDown, Volume2, Info, Sun, Moon as MoonIcon, Bed, SkipForward, SkipBack, List, AlertCircle, X } from 'lucide-react'
 import { surahs, healingDuas, ruqyahProgram, ruqyahInfo, dailyAdhkar, getVerseAudioUrl, buildPlaylist, buildAdhkarPlaylist, getSurahById } from '../data/quranData'
 import './Ruqyah.css'
 
@@ -15,8 +15,17 @@ export default function Ruqyah() {
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0)
   const [playlistName, setPlaylistName] = useState('')
   const [isPlaying, setIsPlaying] = useState(false)
+  const [notification, setNotification] = useState(null)
 
   const audioRef = useRef(null)
+
+  // Auto-dismiss notification after 4 seconds
+  useEffect(() => {
+    if (notification) {
+      const timer = setTimeout(() => setNotification(null), 4000)
+      return () => clearTimeout(timer)
+    }
+  }, [notification])
 
   const playAudio = (audioId) => {
     if (autoplayMode) return // Don't allow manual play during autoplay
@@ -65,7 +74,7 @@ export default function Ruqyah() {
     // Filter to only items with audio
     const audioItems = playlist.filter(item => item.audioUrl)
     if (audioItems.length === 0) {
-      alert('This program contains no audio items')
+      setNotification({ type: 'warning', message: 'This program contains no audio items' })
       return
     }
 
@@ -149,6 +158,17 @@ export default function Ruqyah() {
   return (
     <div className="page ruqyah-page">
       <audio ref={audioRef} onEnded={handleAudioEnd} />
+
+      {/* Toast Notification */}
+      {notification && (
+        <div className={`toast-notification ${notification.type}`}>
+          <AlertCircle size={18} />
+          <span>{notification.message}</span>
+          <button className="toast-close" onClick={() => setNotification(null)}>
+            <X size={16} />
+          </button>
+        </div>
+      )}
 
       <header className="page-header">
         <div className="header-icon islamic">
