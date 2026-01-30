@@ -44,7 +44,7 @@ export default function Ruqyah() {
 
   const handleAudioEnd = () => {
     if (autoplayMode && currentPlaylist.length > 0) {
-      // Move to next track
+      // Move to next track (only for audio items - dhikr requires manual advance)
       if (currentTrackIndex < currentPlaylist.length - 1) {
         setCurrentTrackIndex(prev => prev + 1)
       } else {
@@ -56,14 +56,24 @@ export default function Ruqyah() {
     }
   }
 
+  // Check if current track is a dhikr (no audio)
+  const isDhikrTrack = currentTrack && !currentTrack.audioUrl
+
   // Effect to play current track when index changes
   useEffect(() => {
     if (autoplayMode && currentPlaylist.length > 0 && isPlaying) {
       const currentTrack = currentPlaylist[currentTrackIndex]
+      // Only auto-play if track has audio (dhikr items don't)
       if (currentTrack?.audioUrl && audioRef.current) {
         audioRef.current.src = currentTrack.audioUrl
         audioRef.current.play()
         setPlayingAudio(currentTrack.audioUrl)
+      } else {
+        // Dhikr item - pause audio, wait for manual advance
+        setPlayingAudio(null)
+        if (audioRef.current) {
+          audioRef.current.pause()
+        }
       }
     }
   }, [currentTrackIndex, autoplayMode, isPlaying])
@@ -71,21 +81,20 @@ export default function Ruqyah() {
   const startAutoplay = (playlist, name) => {
     if (playlist.length === 0) return
 
-    // Filter to only items with audio
-    const audioItems = playlist.filter(item => item.audioUrl)
-    if (audioItems.length === 0) {
-      setNotification({ type: 'warning', message: 'This program contains no audio items' })
+    // Include all items (audio + dhikr for manual recitation)
+    if (playlist.length === 0) {
+      setNotification({ type: 'warning', message: 'This program contains no items' })
       return
     }
 
-    setCurrentPlaylist(audioItems)
+    setCurrentPlaylist(playlist)
     setPlaylistName(name)
     setCurrentTrackIndex(0)
     setAutoplayMode(true)
     setIsPlaying(true)
 
-    // Start first track
-    const firstTrack = audioItems[0]
+    // Start first track (only if it has audio)
+    const firstTrack = playlist[0]
     if (firstTrack?.audioUrl && audioRef.current) {
       audioRef.current.src = firstTrack.audioUrl
       audioRef.current.play()
@@ -162,8 +171,8 @@ export default function Ruqyah() {
       {/* Toast Notification */}
       {notification && (
         <div className={`toast-notification ${notification.type}`}>
-          <AlertCircle size={18} />
-          <span>{notification.message}</span>
+          <AlertCircle size={18} className="toast-icon" />
+          <span className="toast-message">{notification.message}</span>
           <button className="toast-close" onClick={() => setNotification(null)}>
             <X size={16} />
           </button>
@@ -196,18 +205,32 @@ export default function Ruqyah() {
 
       {/* Autoplay Player Bar */}
       {autoplayMode && (
-        <div className="autoplay-bar">
+        <div className={`autoplay-bar ${isDhikrTrack ? 'dhikr-mode' : ''}`}>
           <div className="autoplay-info">
             <span className="playlist-name">{playlistName}</span>
             <span className="track-counter">{currentTrackIndex + 1} / {currentPlaylist.length}</span>
           </div>
           {currentTrack && (
-            <div className="current-track">
-              <p className="track-arabic">{currentTrack.arabic?.substring(0, 50)}...</p>
+            <div className={`current-track ${isDhikrTrack ? 'dhikr-track' : ''}`}>
+              {isDhikrTrack && (
+                <div className="dhikr-badge">
+                  <span>Recite {currentTrack.totalRepetitions}x</span>
+                  {currentTrack.totalRepetitions > 1 && (
+                    <span className="rep-counter">({currentTrack.repetition}/{currentTrack.totalRepetitions})</span>
+                  )}
+                </div>
+              )}
+              <p className="track-arabic">{isDhikrTrack ? currentTrack.arabic : currentTrack.arabic?.substring(0, 50) + '...'}</p>
+              {isDhikrTrack && currentTrack.transliteration && (
+                <p className="track-transliteration">{currentTrack.transliteration}</p>
+              )}
+              {isDhikrTrack && currentTrack.translation && (
+                <p className="track-translation">{currentTrack.translation}</p>
+              )}
               <p className="track-name">
                 {currentTrack.itemName || currentTrack.surahName}
                 {currentTrack.verseNumber && ` ${currentTrack.verseNumber}`}
-                {currentTrack.totalRepetitions > 1 && ` (${currentTrack.repetition}/${currentTrack.totalRepetitions})`}
+                {!isDhikrTrack && currentTrack.totalRepetitions > 1 && ` (${currentTrack.repetition}/${currentTrack.totalRepetitions})`}
               </p>
             </div>
           )}
@@ -215,12 +238,21 @@ export default function Ruqyah() {
             <button onClick={skipPrev} disabled={currentTrackIndex === 0}>
               <SkipBack size={20} />
             </button>
-            <button onClick={togglePlayPause} className="play-pause-btn">
-              {isPlaying ? <Pause size={24} /> : <Play size={24} />}
-            </button>
-            <button onClick={skipNext} disabled={currentTrackIndex >= currentPlaylist.length - 1}>
-              <SkipForward size={20} />
-            </button>
+            {isDhikrTrack ? (
+              <button onClick={skipNext} className="next-dhikr-btn" disabled={currentTrackIndex >= currentPlaylist.length - 1}>
+                <ChevronRight size={24} />
+                <span>Next</span>
+              </button>
+            ) : (
+              <button onClick={togglePlayPause} className="play-pause-btn">
+                {isPlaying ? <Pause size={24} /> : <Play size={24} />}
+              </button>
+            )}
+            {!isDhikrTrack && (
+              <button onClick={skipNext} disabled={currentTrackIndex >= currentPlaylist.length - 1}>
+                <SkipForward size={20} />
+              </button>
+            )}
             <button onClick={stopAutoplay} className="stop-btn">
               <Square size={20} />
             </button>
@@ -347,7 +379,9 @@ export default function Ruqyah() {
                 {dailyAdhkar.morning.items.slice(0, 4).map((item, idx) => (
                   <span key={idx} className="preview-item">{item.name}</span>
                 ))}
-                <span className="more-items">+{dailyAdhkar.morning.items.length - 4} more</span>
+                {dailyAdhkar.morning.items.length > 4 && (
+                  <span className="more-items">+{dailyAdhkar.morning.items.length - 4} more</span>
+                )}
               </div>
               <button
                 className="btn btn-primary play-adhkar-btn"
@@ -376,7 +410,9 @@ export default function Ruqyah() {
                 {dailyAdhkar.evening.items.slice(0, 4).map((item, idx) => (
                   <span key={idx} className="preview-item">{item.name}</span>
                 ))}
-                <span className="more-items">+{dailyAdhkar.evening.items.length - 4} more</span>
+                {dailyAdhkar.evening.items.length > 4 && (
+                  <span className="more-items">+{dailyAdhkar.evening.items.length - 4} more</span>
+                )}
               </div>
               <button
                 className="btn btn-primary play-adhkar-btn evening-btn"
@@ -405,7 +441,9 @@ export default function Ruqyah() {
                 {dailyAdhkar.beforeSleep.items.slice(0, 4).map((item, idx) => (
                   <span key={idx} className="preview-item">{item.name}</span>
                 ))}
-                <span className="more-items">+{dailyAdhkar.beforeSleep.items.length - 4} more</span>
+                {dailyAdhkar.beforeSleep.items.length > 4 && (
+                  <span className="more-items">+{dailyAdhkar.beforeSleep.items.length - 4} more</span>
+                )}
               </div>
               <button
                 className="btn btn-primary play-adhkar-btn sleep-btn"

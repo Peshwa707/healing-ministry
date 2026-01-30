@@ -742,3 +742,77 @@
 .toast-notification .toast-close:hover {
   opacity: 1;
 }
+
+/* Dhikr Mode in Autoplay Bar */
+.autoplay-bar.dhikr-mode {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+.current-track.dhikr-track {
+  background: rgba(255, 255, 255, 0.2);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.dhikr-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.dhikr-badge span {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.dhikr-badge .rep-counter {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.dhikr-track .track-arabic {
+  font-family: 'Amiri', 'Traditional Arabic', serif;
+  font-size: 1.3rem;
+  line-height: 1.8;
+  direction: rtl;
+  text-align: right;
+  margin-bottom: var(--spacing-sm);
+}
+
+.dhikr-track .track-transliteration {
+  font-style: italic;
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-bottom: var(--spacing-xs);
+}
+
+.dhikr-track .track-translation {
+  font-size: 0.85rem;
+  opacity: 0.85;
+  line-height: 1.5;
+  margin-bottom: var(--spacing-sm);
+}
+
+.next-dhikr-btn {
+  background: white !important;
+  color: #d97706 !important;
+  padding: var(--spacing-sm) var(--spacing-lg) !important;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-weight: 600;
+}
+
+.next-dhikr-btn:hover:not(:disabled) {
+  background: #fef3c7 !important;
+}
+
+.next-dhikr-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
