@@ -16,6 +16,7 @@ export default function Ruqyah() {
   const [playlistName, setPlaylistName] = useState('')
   const [isPlaying, setIsPlaying] = useState(false)
   const [notification, setNotification] = useState(null)
+  const [expandedAdhkar, setExpandedAdhkar] = useState({}) // Track which adhkar cards are expanded
 
   const audioRef = useRef(null)
 
@@ -55,9 +56,6 @@ export default function Ruqyah() {
       setPlayingAudio(null)
     }
   }
-
-  // Check if current track is a dhikr (no audio)
-  const isDhikrTrack = currentTrack && !currentTrack.audioUrl
 
   // Effect to play current track when index changes
   useEffect(() => {
@@ -163,6 +161,13 @@ export default function Ruqyah() {
   }
 
   const currentTrack = currentPlaylist[currentTrackIndex]
+
+  // Check if current track is a dhikr (no audio)
+  const isDhikrTrack = currentTrack && !currentTrack.audioUrl
+
+  const toggleAdhkarExpand = (type) => {
+    setExpandedAdhkar(prev => ({ ...prev, [type]: !prev[type] }))
+  }
 
   return (
     <div className="page ruqyah-page">
@@ -376,11 +381,16 @@ export default function Ruqyah() {
               </div>
               <p className="adhkar-desc">{dailyAdhkar.morning.description}</p>
               <div className="adhkar-items-preview">
-                {dailyAdhkar.morning.items.slice(0, 4).map((item, idx) => (
+                {(expandedAdhkar.morning ? dailyAdhkar.morning.items : dailyAdhkar.morning.items.slice(0, 4)).map((item, idx) => (
                   <span key={idx} className="preview-item">{item.name}</span>
                 ))}
                 {dailyAdhkar.morning.items.length > 4 && (
-                  <span className="more-items">+{dailyAdhkar.morning.items.length - 4} more</span>
+                  <button
+                    className="more-items-btn"
+                    onClick={() => toggleAdhkarExpand('morning')}
+                  >
+                    {expandedAdhkar.morning ? 'Show less' : `+${dailyAdhkar.morning.items.length - 4} more`}
+                  </button>
                 )}
               </div>
               <button
@@ -407,11 +417,16 @@ export default function Ruqyah() {
               </div>
               <p className="adhkar-desc">{dailyAdhkar.evening.description}</p>
               <div className="adhkar-items-preview">
-                {dailyAdhkar.evening.items.slice(0, 4).map((item, idx) => (
+                {(expandedAdhkar.evening ? dailyAdhkar.evening.items : dailyAdhkar.evening.items.slice(0, 4)).map((item, idx) => (
                   <span key={idx} className="preview-item">{item.name}</span>
                 ))}
                 {dailyAdhkar.evening.items.length > 4 && (
-                  <span className="more-items">+{dailyAdhkar.evening.items.length - 4} more</span>
+                  <button
+                    className="more-items-btn"
+                    onClick={() => toggleAdhkarExpand('evening')}
+                  >
+                    {expandedAdhkar.evening ? 'Show less' : `+${dailyAdhkar.evening.items.length - 4} more`}
+                  </button>
                 )}
               </div>
               <button
@@ -438,11 +453,16 @@ export default function Ruqyah() {
               </div>
               <p className="adhkar-desc">{dailyAdhkar.beforeSleep.description}</p>
               <div className="adhkar-items-preview">
-                {dailyAdhkar.beforeSleep.items.slice(0, 4).map((item, idx) => (
+                {(expandedAdhkar.beforeSleep ? dailyAdhkar.beforeSleep.items : dailyAdhkar.beforeSleep.items.slice(0, 4)).map((item, idx) => (
                   <span key={idx} className="preview-item">{item.name}</span>
                 ))}
                 {dailyAdhkar.beforeSleep.items.length > 4 && (
-                  <span className="more-items">+{dailyAdhkar.beforeSleep.items.length - 4} more</span>
+                  <button
+                    className="more-items-btn"
+                    onClick={() => toggleAdhkarExpand('beforeSleep')}
+                  >
+                    {expandedAdhkar.beforeSleep ? 'Show less' : `+${dailyAdhkar.beforeSleep.items.length - 4} more`}
+                  </button>
                 )}
               </div>
               <button
