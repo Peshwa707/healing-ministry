@@ -1,0 +1,274 @@
+.settings-page .page-header {
+  position: relative;
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.settings-page .back-link {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: var(--spacing-sm);
+  color: var(--color-text-light);
+  border-radius: var(--radius-full);
+  transition: background 0.2s ease;
+}
+
+.settings-page .back-link:hover {
+  background: var(--color-warm);
+}
+
+.settings-page .header-icon.settings-icon {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  color: white;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--spacing-md);
+}
+
+.settings-card {
+  margin-bottom: var(--spacing-md);
+}
+
+.permission-card .setting-icon {
+  background: var(--color-warm);
+  color: var(--color-text-light);
+}
+
+.permission-card .setting-icon.enabled {
+  background: var(--color-success);
+  color: white;
+}
+
+.permission-granted {
+  color: var(--color-success);
+  display: flex;
+  align-items: center;
+}
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+}
+
+.setting-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.setting-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.setting-icon.morning {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.setting-icon.morning.enabled {
+  background: #fbbf24;
+  color: white;
+}
+
+.setting-icon.evening {
+  background: #e0e7ff;
+  color: #6366f1;
+}
+
+.setting-icon.evening.enabled {
+  background: #6366f1;
+  color: white;
+}
+
+.setting-info h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.setting-desc {
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+}
+
+/* Toggle Switch */
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #e5e7eb;
+  transition: 0.3s;
+  border-radius: var(--radius-full);
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.toggle input:checked + .toggle-slider {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+}
+
+.toggle input:checked + .toggle-slider:before {
+  transform: translateX(24px);
+}
+
+.toggle input:disabled + .toggle-slider {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Time Picker */
+.time-picker-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-warm);
+}
+
+.time-icon {
+  color: var(--color-text-light);
+}
+
+.time-picker-row input[type="time"] {
+  flex: 1;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: 1rem;
+  border: 2px solid var(--color-warm);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.time-picker-row input[type="time"]:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+/* Timezone Info */
+.timezone-info {
+  text-align: center;
+  padding: var(--spacing-md);
+  color: var(--color-text-light);
+  font-size: 0.875rem;
+}
+
+.timezone-note {
+  font-size: 0.75rem;
+  margin-top: 4px;
+  opacity: 0.7;
+}
+
+/* Instructions Card */
+.instructions-card {
+  background: var(--color-warm-light);
+  border: 1px solid var(--color-warm);
+}
+
+.instructions-card h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text);
+}
+
+.instructions-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.instructions-card li {
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+  padding: var(--spacing-xs) 0;
+  padding-left: var(--spacing-md);
+  position: relative;
+}
+
+.instructions-card li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+}
+
+/* Toast Notification */
+.settings-page .toast-notification {
+  position: fixed;
+  top: var(--spacing-md);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  z-index: 1000;
+  animation: slideDown 0.3s ease;
+}
+
+.settings-page .toast-notification.success {
+  background: var(--color-success);
+  color: white;
+}
+
+.settings-page .toast-notification.error {
+  background: var(--color-error);
+  color: white;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}

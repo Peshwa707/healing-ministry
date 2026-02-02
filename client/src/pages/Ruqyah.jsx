@@ -1,9 +1,11 @@
 import { useState, useRef, useEffect } from 'react'
-import { Book, Play, Pause, Square, ChevronRight, ChevronDown, Volume2, Info, Sun, Moon as MoonIcon, Bed, SkipForward, SkipBack, List, AlertCircle, X } from 'lucide-react'
+import { useSearchParams, Link } from 'react-router-dom'
+import { Book, Play, Pause, Square, ChevronRight, ChevronDown, Volume2, Info, Sun, Moon as MoonIcon, Bed, SkipForward, SkipBack, List, AlertCircle, X, Bell } from 'lucide-react'
 import { surahs, healingDuas, ruqyahProgram, ruqyahInfo, dailyAdhkar, getVerseAudioUrl, buildPlaylist, buildAdhkarPlaylist, getSurahById } from '../data/quranData'
 import './Ruqyah.css'
 
 export default function Ruqyah() {
+  const [searchParams, setSearchParams] = useSearchParams()
   const [activeTab, setActiveTab] = useState('surahs')
   const [expandedSurah, setExpandedSurah] = useState(null)
   const [playingAudio, setPlayingAudio] = useState(null)
@@ -17,6 +19,7 @@ export default function Ruqyah() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [notification, setNotification] = useState(null)
   const [expandedAdhkar, setExpandedAdhkar] = useState({}) // Track which adhkar cards are expanded
+  const [autoplayTriggered, setAutoplayTriggered] = useState(false)
 
   const audioRef = useRef(null)
 
@@ -27,6 +30,44 @@ export default function Ruqyah() {
       return () => clearTimeout(timer)
     }
   }, [notification])
+
+  // Handle autoplay URL parameter from notification tap
+  useEffect(() => {
+    const autoplayParam = searchParams.get('autoplay')
+    if (autoplayParam && !autoplayTriggered && !autoplayMode) {
+      setAutoplayTriggered(true)
+      setActiveTab('adhkar')
+
+      // Small delay to ensure component is mounted
+      const timer = setTimeout(() => {
+        if (autoplayParam === 'morning' && dailyAdhkar.morning) {
+          playAdhkar('morning')
+        } else if (autoplayParam === 'evening' && dailyAdhkar.evening) {
+          playAdhkar('evening')
+        }
+        // Clear the URL parameter
+        setSearchParams({}, { replace: true })
+      }, 500)
+
+      return () => clearTimeout(timer)
+    }
+  }, [searchParams, autoplayTriggered, autoplayMode])
+
+  // Listen for custom event from notification service (for web in-app notifications)
+  useEffect(() => {
+    const handleStartAdhkar = (event) => {
+      const type = event.detail?.type
+      if (type && !autoplayMode) {
+        setActiveTab('adhkar')
+        setTimeout(() => {
+          playAdhkar(type)
+        }, 100)
+      }
+    }
+
+    window.addEventListener('start-adhkar', handleStartAdhkar)
+    return () => window.removeEventListener('start-adhkar', handleStartAdhkar)
+  }, [autoplayMode])
 
   const playAudio = (audioId) => {
     if (autoplayMode) return // Don't allow manual play during autoplay
@@ -366,6 +407,12 @@ export default function Ruqyah() {
 
       {activeTab === 'adhkar' && (
         <div className="adhkar-section">
+          <div className="adhkar-section-header">
+            <Link to="/settings" className="schedule-link">
+              <Bell size={16} />
+              <span>Schedule Reminders</span>
+            </Link>
+          </div>
           <div className="adhkar-cards">
             {/* Morning Adhkar */}
             <div className="adhkar-card card">

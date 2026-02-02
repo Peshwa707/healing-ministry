@@ -6,6 +6,7 @@ import PrayerWall from './pages/PrayerWall'
 import Salah from './pages/Salah'
 import Afflictions from './pages/Afflictions'
 import Quran from './pages/Quran'
+import Settings from './pages/Settings'
 import './index.css'
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="salah" element={<Salah />} />
           <Route path="afflictions" element={<Afflictions />} />
           <Route path="quran" element={<Quran />} />
+          <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
     </BrowserRouter>

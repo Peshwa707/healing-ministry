@@ -1,5 +1,5 @@
 import { Outlet, NavLink } from 'react-router-dom'
-import { Home, Book, BookOpen, BookText } from 'lucide-react'
+import { Home, Book, BookOpen, BookText, Settings } from 'lucide-react'
 import './Layout.css'
 
 export default function Layout() {
@@ -25,6 +25,10 @@ export default function Layout() {
         <NavLink to="/salah" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
           <BookOpen size={24} />
           <span>Salah</span>
+        </NavLink>
+        <NavLink to="/settings" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+          <Settings size={24} />
+          <span>Settings</span>
         </NavLink>
       </nav>
     </div>
