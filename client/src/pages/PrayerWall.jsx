@@ -37,7 +37,12 @@ export default function PrayerWall() {
     // Load from localStorage or use sample data
     const stored = localStorage.getItem('prayer_wall')
     if (stored) {
-      setPrayers(JSON.parse(stored))
+      try {
+        setPrayers(JSON.parse(stored))
+      } catch (e) {
+        console.error('Failed to parse prayer_wall from localStorage:', e)
+        setPrayers(samplePrayers)
+      }
     } else {
       setPrayers(samplePrayers)
       localStorage.setItem('prayer_wall', JSON.stringify(samplePrayers))
@@ -46,8 +51,35 @@ export default function PrayerWall() {
     // Load prayed-for list
     const prayedList = localStorage.getItem('prayed_for')
     if (prayedList) {
-      setPrayedFor(new Set(JSON.parse(prayedList)))
+      try {
+        setPrayedFor(new Set(JSON.parse(prayedList)))
+      } catch (e) {
+        console.error('Failed to parse prayed_for from localStorage:', e)
+        setPrayedFor(new Set())
+      }
     }
+  }, [])
+
+  // Sync localStorage changes across tabs
+  useEffect(() => {
+    const handleStorageChange = (e) => {
+      if (e.key === 'prayer_wall' && e.newValue) {
+        try {
+          setPrayers(JSON.parse(e.newValue))
+        } catch (err) {
+          console.error('Failed to parse prayer_wall from storage event:', err)
+        }
+      }
+      if (e.key === 'prayed_for' && e.newValue) {
+        try {
+          setPrayedFor(new Set(JSON.parse(e.newValue)))
+        } catch (err) {
+          console.error('Failed to parse prayed_for from storage event:', err)
+        }
+      }
+    }
+    window.addEventListener('storage', handleStorageChange)
+    return () => window.removeEventListener('storage', handleStorageChange)
   }, [])
 
   const handleSubmit = (e) => {

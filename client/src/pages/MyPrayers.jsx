@@ -11,8 +11,28 @@ export default function MyPrayers() {
   useEffect(() => {
     const stored = localStorage.getItem('my_prayers')
     if (stored) {
-      setPrayers(JSON.parse(stored))
+      try {
+        setPrayers(JSON.parse(stored))
+      } catch (e) {
+        console.error('Failed to parse prayers from localStorage:', e)
+        setPrayers([])
+      }
     }
+  }, [])
+
+  // Sync localStorage changes across tabs
+  useEffect(() => {
+    const handleStorageChange = (e) => {
+      if (e.key === 'my_prayers' && e.newValue) {
+        try {
+          setPrayers(JSON.parse(e.newValue))
+        } catch (err) {
+          console.error('Failed to parse prayers from storage event:', err)
+        }
+      }
+    }
+    window.addEventListener('storage', handleStorageChange)
+    return () => window.removeEventListener('storage', handleStorageChange)
   }, [])
 
   const savePrayers = (updated) => {

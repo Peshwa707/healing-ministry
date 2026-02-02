@@ -38,7 +38,13 @@ export default function Home() {
     e.preventDefault()
     if (!quickDua.trim()) return
 
-    const prayers = JSON.parse(localStorage.getItem('my_prayers') || '[]')
+    let prayers = []
+    try {
+      prayers = JSON.parse(localStorage.getItem('my_prayers') || '[]')
+    } catch (e) {
+      console.error('Failed to parse my_prayers from localStorage:', e)
+      prayers = []
+    }
     prayers.unshift({
       id: Date.now(),
       text: quickDua,

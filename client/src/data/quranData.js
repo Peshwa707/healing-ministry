@@ -914,7 +914,7 @@ export const buildPlaylist = (programId) => {
       }
     } else if (item.type === 'verse') {
       const surah = getSurahById(item.surahId);
-      if (surah) {
+      if (surah && surah.verses) {
         const verse = surah.verses.find(v => v.number === item.verseNumber);
         if (verse) {
           for (let t = 0; t < item.times; t++) {
@@ -991,7 +991,7 @@ export const buildAdhkarPlaylist = (adhkarType) => {
       }
     } else if (item.type === 'verse') {
       const surah = getSurahById(item.surahId);
-      if (surah) {
+      if (surah && surah.verses) {
         const verse = surah.verses.find(v => v.number === item.verseNumber);
         if (verse) {
           for (let t = 0; t < item.times; t++) {

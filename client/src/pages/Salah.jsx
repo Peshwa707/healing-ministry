@@ -22,7 +22,15 @@ export default function Salah() {
   const [showAnswer, setShowAnswer] = useState(false)
   const [memorizedDuas, setMemorizedDuas] = useState(() => {
     const saved = localStorage.getItem('memorized_duas')
-    return saved ? JSON.parse(saved) : []
+    if (saved) {
+      try {
+        return JSON.parse(saved)
+      } catch (e) {
+        console.error('Failed to parse memorized_duas from localStorage:', e)
+        return []
+      }
+    }
+    return []
   })
   const [memorizationMode, setMemorizationMode] = useState('all') // 'all', 'unmemorized', 'review'
 
