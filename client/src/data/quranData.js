@@ -1040,73 +1040,69 @@ export const buildAdhkarPlaylist = (adhkarType) => {
 // Files should be placed in /public/audio/ruqyah/
 export const fullRuqyahRecordings = [
   {
-    id: 'ruqyah-general-1',
-    title: 'General Ruqyah for Healing',
-    arabicTitle: 'رقية شرعية للشفاء',
-    reciter: 'Sheikh Mishary Rashid Alafasy',
-    reciterArabic: 'الشيخ مشاري راشد العفاسي',
-    duration: '45:00',
+    id: 'ruqyah-shifa-sukoon',
+    title: 'Ruqyah for Shifa & Sukoon',
+    arabicTitle: 'رقية الشفاء والسكون',
+    reciter: 'Unknown Reciter',
+    reciterArabic: 'قارئ',
+    duration: '28:00',
     category: 'general',
-    description: 'Complete ruqyah recitation for general healing and protection',
-    audioFile: '/audio/ruqyah/ruqyah-general-healing.mp3',
+    description: 'Complete ruqyah recitation for healing (shifa) and tranquility (sukoon)',
+    audioFile: '/audio/ruqyah/ruqyah shifa and sukoon.m4a',
     contents: [
-      'Surah Al-Fatiha (7 times)',
-      'Ayat al-Kursi',
-      'Last verses of Al-Baqarah',
-      'Surah Al-Ikhlas, Al-Falaq, An-Nas',
-      'Healing duas'
+      'Healing verses from Quran',
+      'Verses for peace and tranquility',
+      'Protective supplications'
     ]
   },
   {
-    id: 'ruqyah-sihr-1',
-    title: 'Ruqyah for Sihr (Magic)',
-    arabicTitle: 'رقية السحر',
-    reciter: 'Sheikh Saad Al-Ghamdi',
-    reciterArabic: 'الشيخ سعد الغامدي',
-    duration: '60:00',
+    id: 'ruqyah-burning',
+    title: 'Burning Ruqyah',
+    arabicTitle: 'الرقية الحارقة',
+    reciter: 'Unknown Reciter',
+    reciterArabic: 'قارئ',
+    duration: '16:00',
+    category: 'general',
+    description: 'Intense burning ruqyah for powerful spiritual cleansing',
+    audioFile: '/audio/ruqyah/burning ruqyah.mpeg',
+    contents: [
+      'Powerful verses for spiritual cleansing',
+      'Intense recitation style',
+      'Protective supplications'
+    ]
+  },
+  {
+    id: 'ruqyah-destroying-magic',
+    title: 'Destroying Magic Ruqyah',
+    arabicTitle: 'رقية إبطال السحر',
+    reciter: 'Unknown Reciter',
+    reciterArabic: 'قارئ',
+    duration: '15:00',
     category: 'sihr',
-    description: 'Ruqyah specifically for protection and healing from magic',
-    audioFile: '/audio/ruqyah/ruqyah-sihr.mp3',
+    description: 'Ruqyah specifically for destroying and nullifying magic (sihr)',
+    audioFile: '/audio/ruqyah/Destroying magic.mpeg',
     contents: [
       'Verses about magic from Al-Baqarah',
       'Surah Al-Araf (magic verses)',
-      'Surah Yunus (magic verses)',
-      'Surah Taha (magic verses)',
-      'Protective duas'
+      'Surah Yunus & Taha (magic verses)',
+      'Protective duas against sihr'
     ]
   },
   {
-    id: 'ruqyah-ayn-1',
-    title: 'Ruqyah for Evil Eye',
-    arabicTitle: 'رقية العين والحسد',
-    reciter: 'Sheikh Abdul Rahman Al-Sudais',
-    reciterArabic: 'الشيخ عبد الرحمن السديس',
-    duration: '30:00',
-    category: 'evil-eye',
-    description: 'Ruqyah for protection from evil eye and envy',
-    audioFile: '/audio/ruqyah/ruqyah-evil-eye.mp3',
+    id: 'ruqyah-marriage-magic',
+    title: 'Marriage Magic Destruction',
+    arabicTitle: 'رقية سحر التفريق',
+    reciter: 'Unknown Reciter',
+    reciterArabic: 'قارئ',
+    duration: '20:00',
+    category: 'sihr',
+    description: 'Ruqyah for destroying marriage-related magic and separation spells',
+    audioFile: '/audio/ruqyah/marriage magic destroy.mpeg',
     contents: [
-      'Surah Al-Fatiha',
-      'Surah Al-Falaq (protection from envy)',
-      'Surah An-Nas',
-      'Specific duas for evil eye'
-    ]
-  },
-  {
-    id: 'ruqyah-jinn-1',
-    title: 'Ruqyah for Jinn Affliction',
-    arabicTitle: 'رقية المس',
-    reciter: 'Sheikh Khalid Al-Qahtani',
-    reciterArabic: 'الشيخ خالد القحطاني',
-    duration: '55:00',
-    category: 'jinn',
-    description: 'Powerful ruqyah for jinn-related afflictions',
-    audioFile: '/audio/ruqyah/ruqyah-jinn.mp3',
-    contents: [
-      'Surah Al-Baqarah (selected verses)',
-      'Surah Al-Jinn',
-      'Verses mentioning jinn',
-      'Protective supplications'
+      'Verses against separation magic',
+      'Protection for marital relationships',
+      'Duas for family harmony',
+      'Counter-magic supplications'
     ]
   }
 ];
