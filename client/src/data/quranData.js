@@ -1038,6 +1038,9 @@ export const buildAdhkarPlaylist = (adhkarType) => {
 // Full Ruqyah Audio Recordings
 // Long-form audio recitations by qualified reciters
 // Files should be placed in /public/audio/ruqyah/
+// R2 CDN base URL for audio files
+export const AUDIO_R2_BASE = 'https://pub-b9c960aaf6f649c0a1d811a019d91219.r2.dev';
+
 export const fullRuqyahRecordings = [
   {
     id: 'ruqyah-shifa-sukoon',
@@ -1048,7 +1051,7 @@ export const fullRuqyahRecordings = [
     duration: '28:00',
     category: 'general',
     description: 'Complete ruqyah recitation for healing (shifa) and tranquility (sukoon)',
-    audioFile: '/audio/ruqyah/ruqyah shifa and sukoon.m4a',
+    audioFile: `${AUDIO_R2_BASE}/ruqyah%20shifa%20and%20sukoon.m4a`,
     contents: [
       'Healing verses from Quran',
       'Verses for peace and tranquility',
@@ -1064,7 +1067,7 @@ export const fullRuqyahRecordings = [
     duration: '16:00',
     category: 'general',
     description: 'Intense burning ruqyah for powerful spiritual cleansing',
-    audioFile: '/audio/ruqyah/burning ruqyah.mpeg',
+    audioFile: `${AUDIO_R2_BASE}/burning%20ruqyah.mpeg`,
     contents: [
       'Powerful verses for spiritual cleansing',
       'Intense recitation style',
@@ -1080,7 +1083,7 @@ export const fullRuqyahRecordings = [
     duration: '15:00',
     category: 'sihr',
     description: 'Ruqyah specifically for destroying and nullifying magic (sihr)',
-    audioFile: '/audio/ruqyah/Destroying magic.mpeg',
+    audioFile: `${AUDIO_R2_BASE}/Destroying%20magic.mpeg`,
     contents: [
       'Verses about magic from Al-Baqarah',
       'Surah Al-Araf (magic verses)',
@@ -1097,7 +1100,7 @@ export const fullRuqyahRecordings = [
     duration: '20:00',
     category: 'sihr',
     description: 'Ruqyah for destroying marriage-related magic and separation spells',
-    audioFile: '/audio/ruqyah/marriage magic destroy.mpeg',
+    audioFile: `${AUDIO_R2_BASE}/marriage%20magic%20destroy.mpeg`,
     contents: [
       'Verses against separation magic',
       'Protection for marital relationships',
