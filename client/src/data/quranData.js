@@ -1035,12 +1035,100 @@ export const buildAdhkarPlaylist = (adhkarType) => {
   return playlist;
 };
 
+// Full Ruqyah Audio Recordings
+// Long-form audio recitations by qualified reciters
+// Files should be placed in /public/audio/ruqyah/
+export const fullRuqyahRecordings = [
+  {
+    id: 'ruqyah-general-1',
+    title: 'General Ruqyah for Healing',
+    arabicTitle: 'رقية شرعية للشفاء',
+    reciter: 'Sheikh Mishary Rashid Alafasy',
+    reciterArabic: 'الشيخ مشاري راشد العفاسي',
+    duration: '45:00',
+    category: 'general',
+    description: 'Complete ruqyah recitation for general healing and protection',
+    audioFile: '/audio/ruqyah/ruqyah-general-healing.mp3',
+    contents: [
+      'Surah Al-Fatiha (7 times)',
+      'Ayat al-Kursi',
+      'Last verses of Al-Baqarah',
+      'Surah Al-Ikhlas, Al-Falaq, An-Nas',
+      'Healing duas'
+    ]
+  },
+  {
+    id: 'ruqyah-sihr-1',
+    title: 'Ruqyah for Sihr (Magic)',
+    arabicTitle: 'رقية السحر',
+    reciter: 'Sheikh Saad Al-Ghamdi',
+    reciterArabic: 'الشيخ سعد الغامدي',
+    duration: '60:00',
+    category: 'sihr',
+    description: 'Ruqyah specifically for protection and healing from magic',
+    audioFile: '/audio/ruqyah/ruqyah-sihr.mp3',
+    contents: [
+      'Verses about magic from Al-Baqarah',
+      'Surah Al-Araf (magic verses)',
+      'Surah Yunus (magic verses)',
+      'Surah Taha (magic verses)',
+      'Protective duas'
+    ]
+  },
+  {
+    id: 'ruqyah-ayn-1',
+    title: 'Ruqyah for Evil Eye',
+    arabicTitle: 'رقية العين والحسد',
+    reciter: 'Sheikh Abdul Rahman Al-Sudais',
+    reciterArabic: 'الشيخ عبد الرحمن السديس',
+    duration: '30:00',
+    category: 'evil-eye',
+    description: 'Ruqyah for protection from evil eye and envy',
+    audioFile: '/audio/ruqyah/ruqyah-evil-eye.mp3',
+    contents: [
+      'Surah Al-Fatiha',
+      'Surah Al-Falaq (protection from envy)',
+      'Surah An-Nas',
+      'Specific duas for evil eye'
+    ]
+  },
+  {
+    id: 'ruqyah-jinn-1',
+    title: 'Ruqyah for Jinn Affliction',
+    arabicTitle: 'رقية المس',
+    reciter: 'Sheikh Khalid Al-Qahtani',
+    reciterArabic: 'الشيخ خالد القحطاني',
+    duration: '55:00',
+    category: 'jinn',
+    description: 'Powerful ruqyah for jinn-related afflictions',
+    audioFile: '/audio/ruqyah/ruqyah-jinn.mp3',
+    contents: [
+      'Surah Al-Baqarah (selected verses)',
+      'Surah Al-Jinn',
+      'Verses mentioning jinn',
+      'Protective supplications'
+    ]
+  }
+];
+
+// Categories for full ruqyah recordings
+export const ruqyahCategories = [
+  { id: 'all', name: 'All', arabicName: 'الكل' },
+  { id: 'general', name: 'General Healing', arabicName: 'شفاء عام' },
+  { id: 'sihr', name: 'Magic (Sihr)', arabicName: 'السحر' },
+  { id: 'evil-eye', name: 'Evil Eye', arabicName: 'العين والحسد' },
+  { id: 'jinn', name: 'Jinn Affliction', arabicName: 'المس' },
+  { id: 'anxiety', name: 'Anxiety & Depression', arabicName: 'القلق والاكتئاب' }
+];
+
 export default {
   surahs,
   healingDuas,
   ruqyahProgram,
   ruqyahInfo,
   dailyAdhkar,
+  fullRuqyahRecordings,
+  ruqyahCategories,
   getSurahById,
   getVerseAudioUrl,
   getDuaById,

@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useSearchParams, Link } from 'react-router-dom'
-import { Book, Play, Pause, Square, ChevronRight, ChevronDown, Volume2, Info, Sun, Moon as MoonIcon, Bed, SkipForward, SkipBack, List, AlertCircle, X, Bell } from 'lucide-react'
-import { surahs, healingDuas, ruqyahProgram, ruqyahInfo, dailyAdhkar, getVerseAudioUrl, buildPlaylist, buildAdhkarPlaylist, getSurahById } from '../data/quranData'
+import { Book, Play, Pause, Square, ChevronRight, ChevronDown, Volume2, Info, Sun, Moon as MoonIcon, Bed, SkipForward, SkipBack, List, AlertCircle, X, Bell, Headphones, Clock, User, Filter } from 'lucide-react'
+import { surahs, healingDuas, ruqyahProgram, ruqyahInfo, dailyAdhkar, fullRuqyahRecordings, ruqyahCategories, getVerseAudioUrl, buildPlaylist, buildAdhkarPlaylist, getSurahById } from '../data/quranData'
 import './Ruqyah.css'
 
 export default function Ruqyah() {
@@ -20,6 +20,8 @@ export default function Ruqyah() {
   const [notification, setNotification] = useState(null)
   const [expandedAdhkar, setExpandedAdhkar] = useState({}) // Track which adhkar cards are expanded
   const [autoplayTriggered, setAutoplayTriggered] = useState(false)
+  const [selectedCategory, setSelectedCategory] = useState('all') // For filtering full recordings
+  const [playingRecording, setPlayingRecording] = useState(null) // Currently playing full recording
 
   const audioRef = useRef(null)
 
@@ -308,6 +310,13 @@ export default function Ruqyah() {
 
       <div className="tabs">
         <button
+          className={`tab ${activeTab === 'recordings' ? 'active' : ''}`}
+          onClick={() => setActiveTab('recordings')}
+        >
+          <Headphones size={16} />
+          Recordings
+        </button>
+        <button
           className={`tab ${activeTab === 'surahs' ? 'active' : ''}`}
           onClick={() => setActiveTab('surahs')}
         >
@@ -332,6 +341,107 @@ export default function Ruqyah() {
           Programs
         </button>
       </div>
+
+      {activeTab === 'recordings' && (
+        <div className="recordings-section">
+          <p className="recordings-intro">
+            Full ruqyah recitations by qualified reciters. Listen for healing and protection.
+          </p>
+
+          {/* Category Filter */}
+          <div className="category-filter">
+            <Filter size={16} />
+            <div className="filter-buttons">
+              {ruqyahCategories.map(cat => (
+                <button
+                  key={cat.id}
+                  className={`filter-btn ${selectedCategory === cat.id ? 'active' : ''}`}
+                  onClick={() => setSelectedCategory(cat.id)}
+                >
+                  {cat.name}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Recordings List */}
+          <div className="recordings-list">
+            {fullRuqyahRecordings
+              .filter(rec => selectedCategory === 'all' || rec.category === selectedCategory)
+              .map(recording => (
+                <div key={recording.id} className="recording-card card">
+                  <div className="recording-header">
+                    <div className="recording-icon">
+                      <Headphones size={28} />
+                    </div>
+                    <div className="recording-info">
+                      <h3>{recording.title}</h3>
+                      <span className="arabic-title">{recording.arabicTitle}</span>
+                      <div className="recording-meta">
+                        <span className="reciter">
+                          <User size={14} />
+                          {recording.reciter}
+                        </span>
+                        <span className="duration">
+                          <Clock size={14} />
+                          {recording.duration}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="recording-desc">{recording.description}</p>
+                  <div className="recording-contents">
+                    <h4>Contains:</h4>
+                    <ul>
+                      {recording.contents.map((item, idx) => (
+                        <li key={idx}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <button
+                    className={`btn btn-primary play-recording-btn ${playingRecording === recording.id ? 'playing' : ''}`}
+                    onClick={() => {
+                      if (playingRecording === recording.id) {
+                        audioRef.current?.pause()
+                        setPlayingRecording(null)
+                        setPlayingAudio(null)
+                      } else {
+                        if (audioRef.current) {
+                          audioRef.current.src = recording.audioFile
+                          audioRef.current.play().catch(err => {
+                            console.error('Audio error:', err)
+                            setNotification({ type: 'error', message: 'Audio file not found. Please add the MP3 file.' })
+                          })
+                          setPlayingRecording(recording.id)
+                          setPlayingAudio(recording.audioFile)
+                        }
+                      }
+                    }}
+                    disabled={autoplayMode}
+                  >
+                    {playingRecording === recording.id ? (
+                      <>
+                        <Pause size={18} />
+                        Stop
+                      </>
+                    ) : (
+                      <>
+                        <Play size={18} />
+                        Play Full Ruqyah
+                      </>
+                    )}
+                  </button>
+                </div>
+              ))}
+          </div>
+
+          {fullRuqyahRecordings.filter(rec => selectedCategory === 'all' || rec.category === selectedCategory).length === 0 && (
+            <div className="empty-state">
+              <p>No recordings found in this category.</p>
+            </div>
+          )}
+        </div>
+      )}
 
       {activeTab === 'surahs' && (
         <div className="surahs-list">
