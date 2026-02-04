@@ -5,12 +5,35 @@ import {
 } from 'lucide-react'
 import './Quran.css'
 
-// API endpoints
-const SURAH_LIST_API = 'https://api.alquran.cloud/v1/surah'
-const SURAH_ARABIC_API = 'https://api.alquran.cloud/v1/surah'
-const SURAH_TRANSLATION_API = 'https://api.alquran.cloud/v1/surah'
-const TAFSIR_API = 'https://quranapi.pages.dev/api/tafsir'
-const AUDIO_BASE_URL = 'https://cdn.islamic.network/quran/audio/128/ar.alafasy'
+// API endpoints - use environment variables with fallbacks
+const API_CONFIG = {
+  surahList: import.meta.env.VITE_SURAH_API || 'https://api.alquran.cloud/v1/surah',
+  surahArabic: import.meta.env.VITE_SURAH_API || 'https://api.alquran.cloud/v1/surah',
+  surahTranslation: import.meta.env.VITE_SURAH_API || 'https://api.alquran.cloud/v1/surah',
+  tafsir: import.meta.env.VITE_TAFSIR_API || 'https://quranapi.pages.dev/api/tafsir',
+  audio: import.meta.env.VITE_AUDIO_URL || 'https://cdn.islamic.network/quran/audio/128/ar.alafasy'
+}
+
+// Fetch with timeout wrapper to prevent hanging requests
+const fetchWithTimeout = async (url, options = {}, timeout = 10000) => {
+  const controller = new AbortController()
+  const timeoutId = setTimeout(() => controller.abort(), timeout)
+
+  try {
+    const response = await fetch(url, {
+      ...options,
+      signal: options.signal || controller.signal
+    })
+    clearTimeout(timeoutId)
+    return response
+  } catch (error) {
+    clearTimeout(timeoutId)
+    if (error.name === 'AbortError') {
+      throw new Error('Request timed out')
+    }
+    throw error
+  }
+}
 
 export default function Quran() {
   const [surahs, setSurahs] = useState([])
@@ -31,13 +54,14 @@ export default function Quran() {
   useEffect(() => {
     const fetchSurahs = async () => {
       try {
-        const response = await fetch(SURAH_LIST_API)
+        const response = await fetchWithTimeout(API_CONFIG.surahList)
         const data = await response.json()
         if (data.code === 200) {
           setSurahs(data.data)
         }
       } catch (error) {
         console.error('Error fetching surahs:', error)
+        setFetchError('Failed to load Quran. Please check your connection.')
       } finally {
         setLoading(false)
       }
@@ -63,11 +87,11 @@ export default function Quran() {
     setFetchError(null)
 
     try {
-      // Fetch Arabic and English translation in parallel
+      // Fetch Arabic and English translation in parallel with timeout
       const [arabicRes, englishRes, tafsirRes] = await Promise.all([
-        fetch(`${SURAH_ARABIC_API}/${surahNumber}`, { signal }),
-        fetch(`${SURAH_TRANSLATION_API}/${surahNumber}/en.asad`, { signal }),
-        fetch(`${TAFSIR_API}/${surahNumber}.json`, { signal })
+        fetchWithTimeout(`${API_CONFIG.surahArabic}/${surahNumber}`, { signal }, 15000),
+        fetchWithTimeout(`${API_CONFIG.surahTranslation}/${surahNumber}/en.asad`, { signal }, 15000),
+        fetchWithTimeout(`${API_CONFIG.tafsir}/${surahNumber}.json`, { signal }, 15000)
       ])
 
       // Check if request was aborted
@@ -134,7 +158,7 @@ export default function Quran() {
       audioRef.current.onerror = null
     }
 
-    audioRef.current = new Audio(`${AUDIO_BASE_URL}/${audioId}.mp3`)
+    audioRef.current = new Audio(`${API_CONFIG.audio}/${audioId}.mp3`)
     audioRef.current.play().catch(err => console.error('Audio error:', err))
     setPlayingAudio(audioId)
 

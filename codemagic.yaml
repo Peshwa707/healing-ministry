@@ -5,8 +5,10 @@ workflows:
     instance_type: linux_x2
     working_directory: client
     environment:
-      node: 22
+      node: 20
       java: 21
+      vars:
+        NODE_ENV: production
     scripts:
       - name: Install dependencies
         script: |
@@ -20,7 +22,8 @@ workflows:
       - name: Build Android APK
         script: |
           cd android
-          bash gradlew assembleDebug
+          chmod +x gradlew
+          ./gradlew assembleDebug
       - name: Copy APK to output
         script: |
           mkdir -p /tmp/artifacts
